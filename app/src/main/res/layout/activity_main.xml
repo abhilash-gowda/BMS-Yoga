@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|fill_horizontal"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/lin1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Registration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/email_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:ellipsize="end"
+            android:hint="Email"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+
+            android:paddingLeft="15dp"
+            android:scrollHorizontally="true"
+
+            />
+
+        <EditText
+            android:id="@+id/pw_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:ellipsize="end"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"
+
+            android:paddingLeft="15dp"
+
+            android:scrollHorizontally="true"
+
+            />
+
+        <EditText
+            android:id="@+id/pwc_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:ellipsize="end"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"
+
+            android:paddingLeft="15dp"
+
+            android:scrollHorizontally="true" />
+
+        <Button
+            android:id="@+id/button_regis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+
+
+            android:text="Register" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Login"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/email_et_login"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:ellipsize="end"
+            android:hint="Email"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+
+            android:paddingLeft="15dp"
+            android:scrollHorizontally="true" />
+
+        <EditText
+            android:id="@+id/pw_et_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:ellipsize="end"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"
+
+            android:paddingLeft="15dp"
+            android:scrollHorizontally="true" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
+            android:text="Log In" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
