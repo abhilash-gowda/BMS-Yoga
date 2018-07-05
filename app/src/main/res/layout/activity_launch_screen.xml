@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:fontFamily="@font/roboto_italic"
-                android:text="Inhale the future. Exhale the past."
+                android:text="@string/tag_line"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/colorWhite"
@@ -59,6 +59,6 @@
         android:layout_margin="10dp"
         android:text="Powered by ICL"
         android:textColor="@color/colorWhite"
-        android:textAppearance="@android:style/TextAppearance.Holo.Small"></TextView>
+        android:textAppearance="@android:style/TextAppearance.Holo.Small"/>
 
 </RelativeLayout>
