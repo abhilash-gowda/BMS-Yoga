@@ -14,5 +14,6 @@
     <string name="title_home">Home</string>
     <string name="profileFrag">Profile Fragment</string>
     <string name="dashbaordFrag">Dashboard Fragment</string>
+    <string name="Notification">Notification</string>
 
 </resources>

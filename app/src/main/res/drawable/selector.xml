@@ -3,5 +3,4 @@
     <item android:state_checked="false" android:color="@color/landing_text_color" />
     <item android:color="@color/colorAccent"/>
 
-
 </selector>
