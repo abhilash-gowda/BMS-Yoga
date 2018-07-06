@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dashboard_profile"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage.profile">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar_profile"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/landing_text_color"
+        android:elevation="4dp"
+        app:theme="@style/ToolBarStyle"
+        />
 
     <TextView
         android:layout_width="match_parent"

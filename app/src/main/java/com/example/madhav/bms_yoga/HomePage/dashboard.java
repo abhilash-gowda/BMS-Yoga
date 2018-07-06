@@ -20,7 +20,6 @@ import android.view.WindowManager;
 
 import com.example.madhav.bms_yoga.R;
 
-
 public class dashboard extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,24 +30,11 @@ public class dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View v = inflater.inflate(R.layout.fragment_dashboard,container,false);
-
         android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.my_toolbar);
-
-       // setSupportActionBar(myToolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
-
-
-        someMethodThatUsesActivity(getActivity());
         return v;
     }
-    void someMethodThatUsesActivity(Activity myActivityReference) {
-        myActivityReference.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-
-
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.dashboard_menu, menu);
