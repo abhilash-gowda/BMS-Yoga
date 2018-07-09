@@ -17,6 +17,111 @@ var minuteFromNow = function(){
 
 
 
+router.get("/", (req, res, next) => {
+  Trainer.find()
+  .select("_id username f_name m_name l_name phone creation_time lastLogin")
+  .exec()
+  .then(docs => {
+    const response = {
+      count: docs.length,
+      trainer: docs.map(doc => {
+        return {
+          _id: doc._id,
+          username: doc.username,
+          f_name: doc.f_name,
+          m_name:doc.m_name,
+          l_name: doc.l_name,
+          phone : doc.phone,
+          creation_time: doc.creation_time,
+          lastLogin : doc.lastLogin,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/trainer/"+ doc._id
+            
+          }
+        };
+      })
+    };
+    
+    res.status(200).json(response);
+    
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+});
+
+
+
+router.get("/:trainerId", (req, res, next) => {
+  const id = req.params.trainerId;
+  Trainer.findById(id)
+    .select('_id username f_name m_name l_name phone creation_time lastLogin')
+    .exec()
+    .then(doc => {
+      console.log("From database", doc);
+      if (doc) {
+        res.status(200).json({
+            trainer_details: doc,
+            request: {
+                type: 'GET',
+                url: 'http://localhost:3000/trainer'
+            }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No trainer found for provided ID" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+});
+
+
+
+
+
+
+
+router.put("/:trainerId", (req, res, next) => {
+  const id = req.params.trainerId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  Trainer.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result =>{
+      console.log(result);
+      res.status(200).json({
+          message: 'trainer details updated',
+          request: {
+              type: 'GET',
+              url: 'http://localhost:3000/trainer/'+ id
+          }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
+
+
+
+
+
+
 
 router.post("/signup", (req, res, next) => {
     Trainer.find({ email: req.body.email })
@@ -72,6 +177,33 @@ router.post("/signup", (req, res, next) => {
       }
     });
 });
+
+
+
+
+router.delete("/:trainerId", (req, res, next) => {
+  const id = req.params.trainerId;
+  Trainer.remove({ _id: id })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+          message: 'Trainer deleted',
+          request: {
+              type: 'POST',
+              url: 'http://localhost:3000/trainer',
+              
+          }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
 
 
 router.post("/login", (req, res, next) => {

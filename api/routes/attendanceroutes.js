@@ -167,7 +167,7 @@ router.post("/attendancecount", (req, res, next) => {
 
 
 
-router.get("/getbymonth", (req, res, next) => {
+router.post("/getbymonth", (req, res, next) => {
   var month = req.body.month;
   var year = req.body.year;
     //get starting and ending dates of the month
@@ -199,7 +199,7 @@ router.get("/getbymonth", (req, res, next) => {
 
 
 
-router.get("/getbydate", (req, res, next) => {
+router.post("/getbydate", (req, res, next) => {
   var startDate = req.body.startDate;
   var endDate = req.body.endDate;
     //find all the record whose start & end date is between than starting & ending dates

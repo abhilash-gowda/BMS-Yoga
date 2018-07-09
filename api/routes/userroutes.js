@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 //const jwt = require("jsonwebtoken");
-
 const User = require("../models/user");
 
 
@@ -17,6 +16,110 @@ var minuteFromNow = function(){
  return n;
 };
 
+
+router.get("/", (req, res, next) => {
+  User.find()
+  .select("_id username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin")
+  .exec()
+  .then(docs => {
+    const response = {
+      count: docs.length,
+      user: docs.map(doc => {
+        return {
+          _id: doc._id,
+          username: doc.username,
+          f_name: doc.f_name,
+          m_name:doc.m_name,
+          l_name: doc.l_name,
+          phone : doc.phone,
+          weight: req.body.weight,
+          height: req.body.height,
+          phone: req.body.phone,
+          medical_con: req.body.medical_con,
+          pain_areas: req.body.pain_areas,
+          medications: req.body.medications,
+          experience: req.body.experience,
+          creation_time: doc.creation_time,
+          lastLogin : doc.lastLogin,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/user/"+ doc._id   
+          }
+        };
+      })
+    };
+    
+    res.status(200).json(response);
+    
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+});
+
+
+
+router.get("/:userId", (req, res, next) => {
+  const id = req.params.userId;
+  User.findById(id)
+    .select('_id username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
+    .exec()
+    .then(doc => {
+      console.log("From database", doc);
+      if (doc) {
+        res.status(200).json({
+            user_details: doc,
+            request: {
+                type: 'GET',
+                url: 'http://localhost:3000/user'
+            }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No user found for provided ID" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+});
+
+
+
+
+
+
+
+router.put("/:userId", (req, res, next) => {
+  const id = req.params.userId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  User.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result =>{
+      console.log(result);
+      res.status(200).json({
+          message: 'user details updated',
+          request: {
+              type: 'GET',
+              url: 'http://localhost:3000/user/'+ id
+          }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
 
 
 router.post("/signup", (req, res, next) => {
@@ -50,6 +153,7 @@ router.post("/signup", (req, res, next) => {
               pain_areas: req.body.pain_areas,
               medications: req.body.medications,
               experience: req.body.experience
+              
             });
             user
               .save()
@@ -129,12 +233,19 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+
 router.delete("/:userId", (req, res, next) => {
-  User.remove({ _id: req.params.userId })
+  const id = req.params.userId;
+  User.remove({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "User deleted"
+          message: 'User deleted',
+          request: {
+              type: 'POST',
+              url: 'http://localhost:3000/user',
+              
+          }
       });
     })
     .catch(err => {
@@ -144,5 +255,6 @@ router.delete("/:userId", (req, res, next) => {
       });
     });
 });
+
 
 module.exports = router;
